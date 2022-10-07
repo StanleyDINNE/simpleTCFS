@@ -6,8 +6,8 @@ public enum Cookies {
     DARK_TEMPTATION("Dark Temptation", 1.90),
     SOO_CHOCOLATE("Soo Chocolate", 1.25);
 
-    private String fullName;
-    private double price;
+    private final String fullName;
+    private final double price;
 
     Cookies(String fullName, double price) {
         this.fullName = fullName;

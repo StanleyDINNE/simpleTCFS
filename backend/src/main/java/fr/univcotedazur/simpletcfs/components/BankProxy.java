@@ -13,7 +13,7 @@ public class BankProxy implements Bank {
     @Value("${bank.host.baseurl}")
     private String bankHostandPort;
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public boolean pay(Customer customer, double value) {

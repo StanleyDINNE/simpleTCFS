@@ -20,5 +20,4 @@ public class Catalog implements CatalogExplorator {
     public Set<Cookies> exploreCatalogue(String regexp) {
         return EnumSet.allOf(Cookies.class).stream().filter(cookie -> cookie.name().matches(regexp)).collect(Collectors.toSet());
     }
-
 }

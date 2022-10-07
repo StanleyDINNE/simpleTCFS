@@ -39,15 +39,13 @@ public class Cart implements CartModifier, CartProcessor {
         if (existing.isPresent()) {
             newQuantity += existing.get().getQuantity();
         }
-        if (newQuantity < 0) {
-            throw new NegativeQuantityException(c.getName(), item.getCookie(), newQuantity);
-        } else if (newQuantity >= 0) {
-            if (existing.isPresent()) {
-                items.remove(existing.get());
-            }
+        if (newQuantity >= 0) {
+            existing.ifPresent(items::remove);
             if (newQuantity > 0) {
                 items.add(new Item(item.getCookie(), newQuantity));
             }
+        } else {
+            throw new NegativeQuantityException(c.getName(), item.getCookie(), newQuantity);
         }
         c.setCart(items);
         return newQuantity;
@@ -77,6 +75,4 @@ public class Cart implements CartModifier, CartProcessor {
         contents(c).clear();
         return res;
     }
-
-
 }

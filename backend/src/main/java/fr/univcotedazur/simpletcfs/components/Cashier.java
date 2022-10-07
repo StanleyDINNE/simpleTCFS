@@ -34,9 +34,7 @@ public class Cashier implements Payment {
         Order order = new Order(customer, new HashSet<>(items));
         double price = order.getPrice();
 
-        boolean status = false;
-        status = bankProxy.pay(customer, price);
-        if (!status) {
+        if (!bankProxy.pay(customer, price)) {
             throw new PaymentException(customer.getName(), price);
         }
 
@@ -46,5 +44,4 @@ public class Cashier implements Payment {
 
         return order;
     }
-
 }

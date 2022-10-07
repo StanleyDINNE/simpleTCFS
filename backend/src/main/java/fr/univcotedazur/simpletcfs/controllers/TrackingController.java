@@ -27,14 +27,13 @@ public class TrackingController {
     private Tracker tracker;
 
     @GetMapping("/{orderId}")
-    public ResponseEntity<String> getOrderStatus(@PathVariable("orderId") long orderId)  {
-        OrderStatus status = null;
+    public ResponseEntity<String> getOrderStatus(@PathVariable("orderId") String orderId)  {
         try {
-            status = tracker.retrieveStatus(orderId);
+            OrderStatus status = tracker.retrieveStatus(orderId);
+            return ResponseEntity.ok().body(status.name());
         } catch (UnknownOrderId e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("orderId " + orderId + " unknown");
         }
-        return ResponseEntity.ok().body(status.name());
     }
 
 }
